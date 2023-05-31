@@ -19,3 +19,13 @@ Customize the appearance and behavior of the installer's user interface.
 
 Refer to the WiX documentation for detailed instructions on customization: 
 [wixtoolset.org/documentation](wixtoolset.org/documentation)
+
+### Learning Objectives
+This project aims to cover the following learning objectives:
+
+1. Setup and create Wix Installer project with .Net
+2. Wix installer project working and code flow.
+3. Working of CustomActions in installer
+4. How to create and design user interface (installer UI) in Wix.
+
+Thank you for your interest in this WiX installer demo project. Happy Coding!
