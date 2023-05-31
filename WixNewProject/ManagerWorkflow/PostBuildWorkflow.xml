@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Manager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com ..\Xsd\Workflow.xsd">
+	<!-- 
+	The Manager PostBuild Workflow is used to setup new Installer postbuild actions.
+
+	The Manager is used to schedule multiple Harvester, SignFile, CustomAction Manager actions without needing to utilize command line parameters. This Workflow will be parsed an action will be run for
+	each action that is setup in the Xml. Use the WorkflowSettings section to setup global settings which all workflow actions of the same name should receive. If a Workflow action specifies a value
+	directly that value will be used rather than the Global Workflow Setting.
+	
+	NOTE: $(VARIABLENAME) will be replaced by a value from either the Manager or from the Environment Variables. The Manager program has values for "WorkflowPath", "WorkflowDirectory",
+	"ManagerPath", "ManagerDirectory". Additional variables may be passed in through command line using "-v variableName=variablevalue" or added to a local workflow by using
+	
+	<WorkflowSettings>
+	    <Variable Name="variableName" Value="variablevalue"/>
+	</WorkflowSettings>
+	
+	For more information on Workflows and the Consolidated Manager, please review http://ace.amcomsoft.com/Teams/ProductTeam/Worksite/SitePages/Installer%20SDK/Tools/Consolidated%20Manager%20Documentation.aspx
+	-->
+	
+	<WorkflowSettings>
+		<Variable Name="ProjectDir" Value="$(WorkflowDirectory).."/>
+		<Variable Name="TargetDir" Value="$(ProjectDir)\bin\**"/>
+
+		<!--
+		Provides control of whether the Manager will stop when an exception is reached.
+		This will fail builds if an exception is encountered.
+		
+		Set this value to "False" to make the installer continue on a failure.
+		-->
+		<Variable Name="StopOnException" Value="true" />
+    
+    <SignFile Certificate="$(ProjectDir)..\CodeSignCert\AmcomSoftwareCodeSign.pfx" TimestampURL="http://timestamp.comodoca.com/authenticode"/> <!-- new certificate -->
+    <!--<SignFile Certificate="$(ProjectDir)\CodeSignCert\2017SymantecCodeSigningCert.pfx" TimestampURL="http://timestamp.comodoca.com/authenticode"/>-->  
+	</WorkflowSettings> 
+
+	<!-- Begin workflow section -->
+	
+	<SignFile Id="Signing MSI">
+		<File Path="$(TargetDir)\*.msi"/>
+	</SignFile>
+</Manager>

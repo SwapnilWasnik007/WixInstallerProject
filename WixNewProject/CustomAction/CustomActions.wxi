@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+	<CustomAction Id="ResetSpokWebProp" Property="SPOKWEBUPGRADEABLE" Value=""/>
+	<Property Id="UninstallSpokWebWixBundle" Hidden="no"/>
+	<CustomAction Id="UninstallSpokWebWixBundle" BinaryKey="WixCA" DllEntry="WixSilentExec" Execute="deferred" Return="ignore"/>
+	
+	<CustomAction Id="InstalledMode" Property="INSTALLEDMODE" Value="[WixUI_InstallMode]" Execute="immediate"/>
+
+
+	<CustomAction Id="AUTOEXPORTTIMEVALID" Script="vbscript" Execute="immediate">
+		<![CDATA[    
+		 value = Session.Property("AUTOEXPORTTIME")     
+		 
+		If IsNumeric(value) = false Then
+			Session.Property("AUTOEXPORTTIMEERROR") = "TRUE"
+		Else
+			 number = CInt(value)
+			 If number < 1 Then
+				Session.Property("AUTOEXPORTTIMEERROR") = "TRUE"
+			 Else
+				Session.Property("AUTOEXPORTTIMEERROR") = ""
+			 End If
+		End If
+ ]]>
+	</CustomAction>
+
+	<InstallUISequence>
+		<Custom Action="InstalledMode" After="ProgressDlg">1</Custom>
+	</InstallUISequence>
+	<InstallExecuteSequence>
+
+		<FindRelatedProducts After="AppSearch"></FindRelatedProducts>
+		<RemoveExistingProducts After="InstallInitialize">
+			1
+		</RemoveExistingProducts>
+
+	</InstallExecuteSequence>
+</Include>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+	<Binary Id="WixNewProjCustomAction.Binary" SourceFile="$(var.WixNewProjCustomAction.TargetDir)\WixNewProjCustomAction.CA.dll"></Binary>
+
+	<CustomAction Id="Binary.GetSelectedFeatureList" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="GetSelectedFeatureList" Execute="immediate"/>
+
+	<CustomAction Id="Binary.GetFeaturePath" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="GetFeaturePath" Execute="immediate"/>
+	<CustomAction Id="Binary.AddLocalList" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="AddLocalList" Execute="immediate"/>
+	<CustomAction Id="Binary.GetFeatureInfo" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="GetFeatureInfo" Execute="immediate"/>
+	<CustomAction Id="Binary.SetSelectedFeaturesRegistry" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="SetSelectedFeaturesRegistry" Execute="immediate"/>
+	<CustomAction Id="Binary.GetRemovedFeatures" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="GetRemovedFeatures" Execute="immediate"/>
+
+
+	<CustomAction Id="Binary.GetProperties" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="GetProperties" Execute="immediate"/>
+
+
+	<Property Id="LDAPPortNumber_Comment" Value="byIf LDAP authentication is in use, specify the port number to be used.  Valid values are: 389, 636 (SSL), 3268, 3269 (SSL)"/>
+	<SetProperty Id="WebExchange1_13" Before="Binary.GetProperties" Sequence="execute" Value="SECTION=appSettings;KEY=LDAPPortNumber;VALUE=3269"/>
+
+	<SetProperty Id="WebExchange1_14" Before="Binary.GetProperties" Sequence="execute" Value="SECTION=appSettings;KEY=LDAPPortNumber;VALUE=3269;COMMENT=[LDAPPortNumber_Comment]"/>
+
+
+	<CustomAction Id="Prop.EventAPIServiceConfig" Property="EventAPIServiceConfig" Value="CONNECTIONSTRING_DBSOURCE=#[CONNECTIONSTRING_DBSOURCE]#"/>
+	<CustomAction Id="EventAPIServiceConfig" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="UpdateEventApiListenerConfig" Execute="deferred" Return="check" />
+
+	<CustomAction Id="Binary.ConnString" BinaryKey="WixNewProjCustomAction.Binary" DllEntry="UpdateConnection" Execute="immediate"/>
+
+
+	<!-- TODO: Put your code here. -->
+	<InstallExecuteSequence>
+
+		<Custom Action="Prop.EventAPIServiceConfig" Before="EventAPIServiceConfig">
+			1
+		</Custom>
+		<Custom Action="EventAPIServiceConfig" After="InstallFiles">
+			1
+		</Custom>
+		
+		
+		<Custom Action="Binary.SetSelectedFeaturesRegistry" After="InstallFinalize">
+			1
+		</Custom>
+
+		<Custom Action="Binary.ConnString" Before="InstallFiles">
+			1
+		</Custom>
+		
+		
+		<Custom Action="Binary.GetProperties" Before="InstallFinalize"></Custom>
+
+	</InstallExecuteSequence>
+</Include>

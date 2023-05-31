@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+	<!--
+	*****************************************************************
+	* User Interface												*
+	*																*
+	* Provides a NuGet controlled section for updating standard		*
+	* Spok Installer User Interface icons and banners.				*
+	*																*
+	* This Section SHOULD NOT BE MODIFIED.							*
+	*****************************************************************
+	-->
+
+	<!--<WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)UserInterface\Graphics\installer.banner.bmp" />
+	<WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)UserInterface\Graphics\installer.leftPanel.bmp" />
+	<Icon Id="Logo" SourceFile="$(var.ProjectDir)UserInterface\Graphics\installer.logo.ico"/>-->
+	<Property Id="ARPPRODUCTICON" Value="Logo" />
+</Include>

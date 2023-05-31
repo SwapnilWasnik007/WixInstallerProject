@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <?include Graphics.wxi?>
+    <UIRef Id="Feature1UI"/>
+    <UIRef Id="Feature2UI"/>
+    <UIRef Id="Feature3UI"/>
+
+
+    <Property Id="WixUI_VerifyReadyDlg_BackInstallDir" Value="[PREVIOUS_DIALOG]" />
+    <Property Id="FEATURE1_LOCAL" Secure="yes"/>
+    <Property Id="FEATURE2_LOCAL" Secure="yes"/>
+    <Property Id="FEATURE3_LOCAL" Secure="yes"/>
+
+    <!--
+		************************************
+		User Interface Section
+		************************************
+		-->
+
+
+    <UI Id="ProductName.Installer.UI">
+      <Publish Property="FEEATURE1_PREV_DIALOG" Dialog="CustomizeDlg_Custom" Control="Next" Order="6">1</Publish>
+      <Publish Property="FEEATURE2_PREV_DIALOG" Dialog="CustomizeDlg_Custom" Control="Next" Order="6">1</Publish>
+      <Publish Property="FEEATURE3_PREV_DIALOG" Dialog="CustomizeDlg_Custom" Control="Next" Order="6">1</Publish>
+      <Publish Property="PREVIOUS_DIALOG" Dialog="CustomizeDlg_Custom" Control="Next" Order="6">1</Publish>
+
+      <!--<Publish Event="DoAction" Value="Binary.GetRemovedFeatures" Order="6" Control="Next" Dialog="CustomizeDlg_Custom"> 1 </Publish>-->
+
+      <Publish Dialog="CustomizeDlg_Custom" Control="Next" Event="NewDialog" Value="Feature1UI" Order="5">
+        <![CDATA[(&Feature1=3) AND (FEATURE1_LOCAL="")]]>
+      </Publish>
+      <Publish Dialog="CustomizeDlg_Custom" Control="Next" Event="NewDialog" Value="Feature2UI" Order="4">
+        <![CDATA[(&Feature2=3) AND (FEATURE2_LOCAL="")]]>
+      </Publish>
+      <Publish Dialog="CustomizeDlg_Custom" Control="Next" Event="NewDialog" Value="Feature3UI" Order="3">
+        <![CDATA[(&Feature3=3) AND (FEATURE3_LOCAL="")]]>
+      </Publish>
+
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Property="VerifyReadyDlg_BackButton" Value="[PREVIOUS_DIALOG]" Order="1">
+        <![CDATA[NOT(PREVIOUS_DIALOG="")]]>
+      </Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Property="PREVIOUS_DIALOG" Order="2">
+        <![CDATA[NOT(PREVIOUS_DIALOG="")]]>
+      </Publish>
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="[VerifyReadyDlg_BackButton]" Order="3">
+        <![CDATA[NOT(VerifyReadyDlg_BackButton="")]]>
+      </Publish>
+
+      <Publish Dialog="CustomizeDlg_Custom" Control="Reset" Property="FEATURE1DIR" Value="[ProgramFilesFolder]" Order="1">
+      </Publish>
+
+
+      <Publish Dialog="CustomizeDlg_Custom" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="3">1</Publish>
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg_Custom">1</Publish>
+    </UI>
+  </Fragment>
+
+  <Fragment>
+    <UI Id="UI_TextStyles">
+      <TextStyle Id="Tahoma10_Bold" FaceName="Tahoma" Size="10" Bold="yes"/>
+      <!--<Binary Id="spokPic" SourceFile="!(wix.WixUIBannerBmp)" />-->
+      <TextStyle Id="Tahoma10" FaceName ="Tahoma" Size="10" Bold ="no"/>
+    </UI>
+  </Fragment>
+</Wix>

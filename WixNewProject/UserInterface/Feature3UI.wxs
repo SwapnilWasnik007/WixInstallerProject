@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <!-- TODO: Put your code here. -->
+
+    <!--
+		************************************
+		User Interface Section
+		************************************
+		-->
+    <UIRef Id="AllUIReferences"/>
+
+
+    <UIRef Id="UI_TextStyles"/>
+    <UI Id="Feature3UI">
+      <Dialog Id="Feature3UI" Width="370" Height="270" NoMinimize ="yes" Title="Dialog :- Feature 3">
+
+
+        <!--<Control Id="SetPreProperty" Type="Line" Text="[PREVIOUS_DIALOG]" Property="FEEATURE3_PREV_DIALOG" Height="17" Width="200" X="50" Y="100" Hidden="yes" >
+          <Publish Property="FEEATURE3_PREV_DIALOG" Value="[PREVIOUS_DIALOG]" Order="1">
+            <![CDATA[NOT(PREVIOUS_DIALOG="")]]>
+          </Publish>
+          <Publish Property="PREVIOUS_DIALOG" Order="2">
+            1
+          </Publish>
+        </Control>-->
+
+        <Control Id="BannerBig0" Type="Text" Height ="17" Width="250" X="10" Y="10" Text="{\WixUI_Font_Title}Shared Directory Location" Transparent="yes"/>
+
+        <Control Id="sampleLineTop0" Type="Line" Height="0" Width="370" X="0" Y="50"/>
+
+        <Control Id="SharedPathLabel"  Type="Text" Text="Please select the shared folder." X="50" Y="80" Height="17" Width="200">
+        </Control>
+        <Control Id="SharedPathTextbox" Type="Edit" Text="[ROOTDRIVEBYCA]" Property="SHAREPATH" Height="17" Width="200" X="50" Y="100" >
+        </Control>
+        <Control Id="btnDirBrowse" Type="PushButton" Width="56" Height="17" X="250" Y="100" Text="Browse" >
+          <Publish Property="_BrowseProperty" Value="SHAREPATH" Order="1">1</Publish>
+          <Publish Event="SpawnDialog" Value="BrowseDlg" Order="2">1</Publish>
+        </Control>
+
+
+        <Control Id="backButton" Type="PushButton" Text="Back" Height="17" Width="56" X="175" Y="243">
+          <Publish Property="FEEATURE3_PREV_DIALOG" Value="[PREVIOUS_DIALOG]" Order="1">
+            <![CDATA[NOT(PREVIOUS_DIALOG="")]]>
+          </Publish>
+          <Publish Property="PREVIOUS_DIALOG" Order="2">
+            <![CDATA[NOT(PREVIOUS_DIALOG="")]]>
+          </Publish>
+
+          <Publish Event="NewDialog" Value="[FEEATURE3_PREV_DIALOG]" Order="3">
+            <![CDATA[NOT(FEEATURE3_PREV_DIALOG="") AND NOT(FEEATURE3_PREV_DIALOG="Feature3UI")]]>
+          </Publish>
+          <Publish Event ="NewDialog" Value="CustomizeDlg_Custom">
+            <![CDATA[(FEEATURE3_PREV_DIALOG="")]]>
+          </Publish>
+        </Control>
+        
+        <Control Id="OkButton" Type="PushButton" Text="Next" Height="17" Width="56" X="237" Y="243">
+          <Publish Property="FEEATURE3_PREV_DIALOG" Value="[PREVIOUS_DIALOG]">
+            <![CDATA[NOT(PREVIOUS_DIALOG="")]]>
+          </Publish>
+			
+          <Publish Property="PREVIOUS_DIALOG" Value="Feature3UI">1</Publish>
+          <Publish Event="NewDialog" Value="VerifyReadyDlg" Order="1">1</Publish >
+        </Control>
+
+        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Height="17" Width="56" X="300" Y="243" Cancel="yes">
+          <Publish Event="EndDialog" Value="Exit" />
+        </Control>
+
+      </Dialog>
+    </UI>
+
+  </Fragment>
+</Wix>

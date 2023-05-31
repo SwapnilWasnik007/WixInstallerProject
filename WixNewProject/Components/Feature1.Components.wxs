@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+	  xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+	<Fragment>
+		<!-- TODO: Put your code here. -->
+		<ComponentGroup Id="ProductComponents1" Directory="INSTALLFOLDER">
+			<Component Id="ProductEXE1" Guid="*">
+				<File Id="fileProduct1" KeyPath="yes" Source="$(var.ProjectDir)Files\WindowsFormsApp1.exe"></File>
+			</Component>
+			<Component Id="ProductEXE1_2" Guid="*">
+				<File Id="fileProduct1_2" KeyPath="yes" Source="$(var.ProjectDir)Files\New\SetFax.exe"></File>
+			</Component>
+			<Component Id="ProductEXE1_3" Guid="*">
+				<File Id="fileProduct1_3" KeyPath="yes" Source="$(var.ProjectDir)Files\New\Text_F1.txt"></File>
+			</Component>
+			<Component Id="ProductEXE1_4" Guid="*">
+				<File Id="fileProduct1_4" KeyPath="yes" Source="$(var.ProjectDir)Files\New\CCSAutoExportUtility.exe.config"></File>
+			</Component>
+			<Component Id="CCSAutoExport_configDbSource" Guid ="9dfbdfc0-2df8-45a9-812e-80e399b56ad4">
+				<CreateFolder/>
+				<Condition><![CDATA[NOT (INSTALLEDMODE = "Repair")]]></Condition>
+				<util:XmlFile Id="CCSAutoExportWebConfig" ElementPath="/configuration/connectionStrings/add[\[]@name='DBConnection'[\]]" Name="connectionString"
+						   Value="[CONNECTIONSTRING]" Action="setValue" File="[INSTALLFOLDER]CCSAutoExportUtility.exe.config"
+						   Sequence="1" PreserveModifiedDate="yes"/>
+			</Component>
+
+			<Component Id="cmpApiListenerIntelliWebAppPool" KeyPath="yes" Guid="{2f13ce24-df91-456e-b516-1ce0965761aa}">
+				<iis:WebAppPool Id="wapApiListener" ManagedRuntimeVersion="v4.0" Name="CCSAPIListener5" ManagedPipelineMode="Integrated" >
+				</iis:WebAppPool>
+			</Component>
+		</ComponentGroup>
+
+		<ComponentGroup Id="ProductComponents2" Directory="FEATURE2DIR">
+			<Component Id="ProductEXE2" Guid="3f9e977e-cb37-4e94-90cd-1193f3a46f65">
+				<File Id="fileProduct2" KeyPath="yes" Source="$(var.ProjectDir)Files\WindowsFormsApp2.exe"></File>
+			</Component>
+			<Component Id="ProductEXE2_2" Guid="23707815-7eff-4326-ae6c-b954402b9008">
+				<File Id="fileProduct2_2" KeyPath="yes" Source="$(var.ProjectDir)Files\New\SetEmail.exe"></File>
+			</Component>
+			<Component Id="ProductEXE2_3" Guid="0b6bdb07-c8ef-4bee-beb1-206e799b6e39">
+				<File Id="fileProduct2_3" KeyPath="yes" Source="$(var.ProjectDir)Files\New\Text_F2.txt"></File>
+			</Component>
+		</ComponentGroup>
+
+		<ComponentGroup Id="ProductComponents3" Directory="FEATURE3DIR">
+			<Component Id="ProductEXE3" Guid="0dd8d0a0-271a-4a0a-8d73-705c36ddcb6c">
+				<File Id="fileProduct3" KeyPath="yes" Source="$(var.ProjectDir)Files\WindowsFormsApp3.exe"></File>
+				<File Id="fileProduct4" Source="$(var.ProjectDir)Files\TextFile3.txt"></File>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

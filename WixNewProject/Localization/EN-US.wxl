@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="VerifyReady.Description">Click Install to begin the installation. Click Back to review or change any of your installation ettings. Click Cancel to exit the wizard.</String>
+	<String Id="ProductName.Name" Overridable="yes">Testing Console</String>
+
+	<String Id="Title.AutoExportUtility.Text">CCS Auto Export Service</String>
+	<String Id="Description.AutoExportUtility.Text">CCS Auto Export Service</String>
+	<String Id="AutoExportUtility.ServiceName">SpokAutoExportService</String>
+	<String Id="AutoExportUtility.ServiceDisplayName">SpokAutoExportService</String>
+	<String Id="AutoExportUtility.ServiceDescription">SpokAutoExportService</String>
+	<String Id="AutoExportUtility.Dialog.Title">Spok Auto Export Service</String>
+	<String Id="AutoExportUtility.DestinationFile.Label">Spok Go Tenent Url *</String>
+	<String Id="AutoExportUtility.FileScheduleTime.Label">File Export Time (Min)</String>
+	<String Id="Mandetory.Label">{\DlgTitleFontRed}*</String>
+
+	<String Id="EventAPIResponse.Dialog.Title">Event API Response Service</String>
+	<String Id="EventAPIResponse.BaseAddress.Label">Base Address </String>
+	<String Id="EventAPIResponse.APIKey.Label">API Key </String>
+	<String Id="EventAPIResponse.SecretId.Label">Secret Id </String>
+	<String Id="EventAPIResponse.SecretValue.Label">Secret Value </String>
+	<String Id="EventAPIResponse.ServiceTime.Label">Service Schedule Time</String>
+</WixLocalization>

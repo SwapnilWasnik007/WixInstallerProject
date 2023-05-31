@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+		<!-- TODO: Put your code here. -->
+		<UI Id="AllUIReferences">
+			<UIRef Id="Feature1UI"/>
+			<UIRef Id="Feature2UI"/>
+			<UIRef Id="Feature3UI"/>
+			<UIRef Id="EventAPIResponseUI"/>
+			<!--<UIRef Id="CustomizeDlg_Custom"/>-->
+		</UI>
+
+	</Fragment>
+</Wix>
