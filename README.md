@@ -28,4 +28,5 @@ This project aims to cover the following learning objectives:
 3. Working of CustomActions in installer
 4. How to create and design user interface (installer UI) in Wix.
 
-Thank you for your interest in this WiX installer demo project. Happy Coding!
+Thank you for your interest in this WiX installer demo project. 
+### Happy coding!
